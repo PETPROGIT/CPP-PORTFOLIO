@@ -14,5 +14,5 @@ A collection of algorithms, data structures, and projects implemented in C++.
 *To be added in the future*
 
 ## 🛠️ Technologies
-- **Language**: C++11 compatible compiler or later
+- **Language**: C++11 or later
 - **Build System**: CMake

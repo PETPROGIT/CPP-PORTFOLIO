@@ -1,6 +1,6 @@
 # Containers
 
-A collection of custom container implementations in C++ demonstrating data structure design and template programming.
+A collection of custom container implementations in C++ demonstrating data structure design.
 
 ## 📦 Available Containers
 

@@ -18,4 +18,3 @@
 - **Система сборки**: CMake
 
 ##
-Ссылка на мой leetcode: https://leetcode.com/progress/

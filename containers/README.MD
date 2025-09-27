@@ -4,5 +4,4 @@ A collection of custom container implementations in C++ demonstrating data struc
 
 ## 📦 Available Containers
 
-### FlatMap
-**Associative container based on sorted vector with binary search**
+### FlatMap - **Associative container based on sorted vector with binary search**

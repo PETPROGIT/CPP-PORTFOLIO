@@ -1,4 +1,4 @@
-# C++ Portfolio Collection
+# C++ Portfolio
 
 A collection of algorithms, data structures, and projects implemented in C++.
 

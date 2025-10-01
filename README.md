@@ -16,3 +16,7 @@ A collection of algorithms, data structures, and projects implemented in C++.
 ## 🛠️ Technologies
 - **Language**: C++11 or later
 - **Build System**: CMake
+
+## 🔗 Links
+- Leetcode: https://leetcode.com/u/MVA54/
+- Telegram: https://t.me/IWBADM/

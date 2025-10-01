@@ -4,11 +4,11 @@ A collection of algorithms, data structures, and projects implemented in C++.
 
 ## 📁 Repository Structure
 
-### 🗂️ Containers
-- **FlatMap** - Associative container based on a sorted vector
-
 ### ⚡ Algorithms
 *To be added in the future*
+
+### 🗂️ Containers
+- **FlatMap** - Associative container based on a sorted vector
 
 ### 🚀 Projects
 *To be added in the future*

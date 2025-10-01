@@ -1,175 +1,152 @@
-markdown
-[file name]: README.md
-[file content begin]
-# FlatMap Container
+FlatMap - C++ Sorted Associative Container
+Overview
+FlatMap is a C++ template class that implements an associative container using a sorted std::vector for storing key-value pairs. The container maintains automatic sorting by keys and provides efficient lookup, insertion, and deletion operations through binary search.
 
-A C++ template-based associative container that stores key-value pairs in sorted order using a flat array structure.
+Key Features
+Sorted Storage: All elements are stored in sorted order by key
 
-## Features
+Fast Lookup: Binary search with O(log n) complexity
 
-- **Header-only implementation** - Easy integration into projects
-- **STL-compatible interface** - Familiar methods like `Insert()`, `Erase()`, `At()`
-- **Binary search operations** - O(log n) lookup performance
-- **Safe and unsafe access** - Both bounds-checked and auto-inserting accessors
-- **Copy and move semantics** - Full support for modern C++ features
+STL-Compatible: Follows Standard Library idioms and conventions
 
-## Class Template
+Type-Safe: Strong typing for keys and values
 
-```cpp
-template<typename Key, typename Value>
-class FlatMap;
-Public Interface
-Constructors
+Exception-Safe: Proper exception handling for access errors
+
+Class Interface
+Constructors and Assignment
 cpp
 // Default constructor
-FlatMap();
+FlatMap<Key, Value>()
 
 // Initializer list constructor
-FlatMap(std::initializer_list<std::pair<Key, Value>> initializer_list);
+FlatMap<Key, Value>(std::initializer_list<Pair>)
 
-// Copy constructor
-FlatMap(const FlatMap& other);
+// Copy and move constructors
+FlatMap(const FlatMap&)
+FlatMap(FlatMap&&) noexcept
 
-// Move constructor
-FlatMap(FlatMap&& other) noexcept;
-Assignment Operators
-cpp
-// Copy assignment
-FlatMap& operator=(const FlatMap& other);
-
-// Move assignment
-FlatMap& operator=(FlatMap&& other) noexcept;
+// Copy and move assignment operators
+FlatMap& operator=(const FlatMap&)
+FlatMap& operator=(FlatMap&&) noexcept
 Element Access
 cpp
-// Unsafe access - inserts default value if key doesn't exist
-Value& operator[](const Key& key);
+// Unsafe access - creates element if key doesn't exist
+Value& operator[](const Key& key)
 
-// Safe access with bounds checking - throws std::out_of_range
-Value& At(const Key& key);
-const Value& At(const Key& key) const;
-
-// Check if key exists
-bool Contains(const Key& key) const;
+// Safe access - throws exception if key doesn't exist
+Value& At(const Key& key)
+const Value& At(const Key& key) const
+Comparison Operators
+cpp
+bool operator==(const FlatMap&) const  // Element-wise equality
+bool operator!=(const FlatMap&) const  // Element-wise inequality
 Modifiers
 cpp
-// Insert key-value pair (returns false if key already exists)
-bool Insert(const std::pair<Key, Value>& pairKeyValue);
-bool Insert(const Key& key, const Value& value);
+// Insertion operations
+bool Insert(const Pair& pairKeyValue)
+bool Insert(const Key& key, const Value& value)
 
-// Remove element by key (returns true if element was removed)
-bool Erase(const Key& key);
+// Deletion operations
+bool Erase(const Key& key)
+void Clear()
 
-// Remove all elements
-void Clear();
-
-// Swap contents with another FlatMap
-void Swap(FlatMap& other) noexcept;
-Capacity
+// Utility operations
+void Swap(FlatMap& other) noexcept
+Capacity and Lookup
 cpp
-// Get number of elements
-size_t Size() const noexcept;
+// Capacity
+size_t Size() const noexcept
+bool Empty() const noexcept
 
-// Check if container is empty
-bool Empty() const noexcept;
-Comparison
-cpp
-// Compare two FlatMaps for equality
-bool operator==(const FlatMap& rightOperand) const;
-bool operator!=(const FlatMap& rightOperand) const;
+// Lookup
+bool Contains(const Key& key) const
 Usage Examples
-Basic Usage
+Basic Operations
 cpp
-#include "flatmap.h"
-#include <iostream>
+FlatMap<std::string, int> map;
 
-int main() {
-    // Create from initializer list
-    FlatMap<std::string, int> map = {
-        {"apple", 5},
-        {"banana", 3},
-        {"orange", 8}
-    };
+// Insert elements
+map.Insert("one", 1);
+map.Insert("two", 2);
+map.Insert("three", 3);
 
-    // Insert new elements
-    map.Insert("grape", 12);
+// Access elements safely
+std::cout << map.At("one") << std::endl; // Output: 1
 
-    // Access elements safely
-    try {
-        std::cout << "apple: " << map.At("apple") << std::endl;
-    } catch (const std::out_of_range& e) {
-        std::cout << "Key not found!" << std::endl;
-    }
-
-    // Access elements unsafely (auto-inserts if missing)
-    map["pear"] = 6;  // Inserts if "pear" doesn't exist
-
-    // Check existence
-    if (map.Contains("banana")) {
-        std::cout << "Banana exists!" << std::endl;
-    }
-
-    // Remove elements
-    map.Erase("orange");
-
-    // Get size
-    std::cout << "Size: " << map.Size() << std::endl;
-
-    return 0;
+// Check key existence
+if (map.Contains("two")) {
+    std::cout << "Key 'two' exists" << std::endl;
 }
-Advanced Usage
+
+// Remove elements
+map.Erase("three");
+Initialization
 cpp
-// Custom key type
-class CustomKey {
-    int id;
-    std::string name;
-public:
-    // Must implement comparison operators
-    bool operator<(const CustomKey& other) const {
-        return std::tie(id, name) < std::tie(other.id, other.name);
-    }
-    bool operator==(const CustomKey& other) const {
-        return std::tie(id, name) == std::tie(other.id, other.name);
-    }
+// Initializer list construction
+FlatMap<int, std::string> map = {
+    {1, "one"},
+    {2, "two"}, 
+    {3, "three"}
 };
+Unsafe Access with Operator[]
+cpp
+FlatMap<std::string, int> scores;
 
-FlatMap<CustomKey, std::string> customMap;
-Implementation Details
-Storage: Uses std::vector<std::pair<Key, Value>> for contiguous storage
+// Creates elements with default values if keys don't exist
+scores["Alice"] = 95;
+scores["Bob"] = 87;
 
-Sorting: Elements are always maintained in sorted order by key
+// Automatically creates element with Value{} (0 for int)
+int charlie_score = scores["Charlie"];
+Error Handling
+cpp
+try {
+    int value = map.At("nonexistent"); // Throws std::out_of_range
+} catch (const std::out_of_range& e) {
+    std::cout << "Error: " << e.what() << std::endl;
+}
+Type Requirements
+Key Type: Must support comparison operators (<, >, ==)
 
-Lookup: Binary search implementation with O(log n) complexity
-
-Insertion/Deletion: O(n) complexity due to potential element shifting
+Value Type: Must be default-constructible
 
 Performance Characteristics
-Operation	Time Complexity	Space Complexity
-At(), Contains(), Find()	O(log n)	O(1)
-Insert(), Erase()	O(n)	O(1)
-operator[]	O(log n) worst case	O(1)
-Iteration	O(n)	O(1)
-File Structure
-text
-project/
-├── flatmap.h      // Main header file with class declaration
-├── flatmap.tpp    // Implementation details (included by flatmap.h)
-└── README.md      // This file
-Requirements
-C++17 or later
+Operation	Complexity	Notes
+Lookup	O(log n)	Binary search
+Insertion	O(n)	Due to vector element shifting
+Deletion	O(n)	Due to vector element shifting
+Memory	Compact	Minimal overhead
+Implementation Details
+Elements are always maintained in sorted order by key
 
-Standard Library headers: <vector>, <utility>, <initializer_list>, <stdexcept>
+Binary search determines insertion positions
+
+operator[] creates default-constructed elements for missing keys
+
+At() throws exceptions for missing keys
+
+Automatic sorting on every insertion
+
+Exception Safety
+std::out_of_range: Thrown by At() when accessing non-existent keys
+
+Strong exception guarantee for most operations
+
+No-throw guarantee for move operations
 
 Best Practices
-Use At() when you need bounds checking and don't want automatic insertion
+Use At() when key existence should be validated
 
-Use operator[] when you want automatic insertion of default values
+Use operator[] when default-constructed values are acceptable
 
-Use Contains() to check existence without the cost of value retrieval
+Prefer batch operations when possible due to O(n) insertion cost
 
-Prefer for small to medium datasets where cache locality outweighs insertion costs
+Consider key types with efficient comparison operations
 
-Thread Safety
-This implementation is not thread-safe. External synchronization is required for concurrent access.
+Compatibility
+C++11 or later required
 
-License
-This code is provided as-is under the MIT License.
+Header-only implementation
+
+No external dependencies beyond Standard Library

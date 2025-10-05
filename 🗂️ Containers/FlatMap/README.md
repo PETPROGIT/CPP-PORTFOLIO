@@ -1,51 +1,51 @@
 # FlatMap
 
-Шаблонный класс `FlatMap<Key, Value>` — это ассоциативный контейнер, реализованный на основе отсортированного вектора пар ключ-значение. Обеспечивает логарифмическое время поиска, вставки и удаления элементов за счет использования бинарного поиска.
+The `FlatMap<Key, Value>` template class is an associative container implemented using a sorted vector of key-value pairs. It provides logarithmic time complexity for search operations and linear time for insertion and deletion through binary search.
 
-## Особенности
+## Features
 
-- **Отсортированное хранение**: Все элементы хранятся в отсортированном порядке по ключу.
-- **Быстрый поиск**: Бинарный поиск обеспечивает время доступа O(log n).
-- **Исключения**: Метод `At()` генерирует `std::out_of_range` при отсутствии ключа.
+- **Sorted Storage**: All elements are stored in sorted order by key
+- **Fast Lookup**: Binary search provides O(log n) access time
+- **Exception Handling**: `At()` method throws `std::out_of_range` when key is not found
 
-## Интерфейс
+## Interface
 
-### Конструкторы:
+### Constructors:
 
-- `FlatMap()` — конструктор по умолчанию.
-- `FlatMap(std::initializer_list<Pair>)` — инициализация списком пар.
-- Копирующие и перемещающие конструкторы.
+- `FlatMap()` - default constructor
+- `FlatMap(std::initializer_list<Pair>)` - initialization with list of pairs
+- Copy and move constructors
 
-### Операции доступа:
+### Access Operations:
 
-- `Value& operator[](const Key& key)` — доступ или создание элемента (при отсутсвии ключа, вставляет его в нужное место со зачемнием по умолчанию).
-- `Value& At(const Key& key)` — доступ с проверкой (бросает исключение при отсутсвии ключа).
-- `const Value& At(const Key& key) const` — константный доступ с проверкой (бросает исключение при отсутсвии ключа).
+- `Value& operator[](const Key& key)` - access or create element (if key is missing, inserts it in the correct position with default value)
+- `Value& At(const Key& key)` - access with bounds checking (throws exception if key is missing)
+- `const Value& At(const Key& key) const` - const access with bounds checking (throws exception if key is missing)
 
-### Модификация:
+### Modification:
 
-- `bool Insert(const Pair&)` — вставка пары ключ-значение.
-- `bool Insert(const Key&, const Value&)` — вставка через отдельные ключ и значение.
-- `bool Erase(const Key&)` — удаление элемента по ключу.
-- `void Clear()` — очистка контейнера.
-- `void Swap(FlatMap&) noexcept` — обмен содержимым между двумя контейнерами.
+- `bool Insert(const Pair&)` - insert key-value pair
+- `bool Insert(const Key&, const Value&)` - insert using separate key and value
+- `bool Erase(const Key&)` - remove element by key
+- `void Clear()` - clear the container
+- `void Swap(FlatMap&) noexcept` - exchange contents between two containers
 
-### Информация о контейнере:
+### Container Information:
 
-- `size_t Size() const noexcept` — текущее количество элементов.
-- `bool Empty() const noexcept` — проверка на пустоту.
-- `bool Contains(const Key&) const` — проверка наличия ключа.
+- `size_t Size() const noexcept` - current number of elements
+- `bool Empty() const noexcept` - check if container is empty
+- `bool Contains(const Key&) const` - check if key exists
 
-### Сравнение:
+### Comparison:
 
-- `operator==`, `operator!=` — поэлементное сравнение.
+- `operator==`, `operator!=` - element-wise comparison
 
-## Требования к типам
+## Type Requirements
 
-- Ключ `Key` должен поддерживать операторы сравнения `<`, `>`, `==`.
-- Оба типа должны быть копируемыми и/или перемещаемыми.
+- Key type `Key` must support comparison operators `<`, `>`, `==`
+- Both types must be copyable and/or movable
 
-## Пример использования
+## Usage Example
 
 ```cpp
 FlatMap<std::string, int> map;
@@ -53,13 +53,13 @@ map.Insert("one", 1);
 map.Insert("two", 2);
 
 std::cout << map.At("one") << std::endl; // 1
-std::cout << map["three"] << std::endl;  // 0 (создан по умолчанию)
+std::cout << map["three"] << std::endl;  // 0 (created with default value)
 
 map.Erase("two");
 std::cout << map.Size() << std::endl;    // 2
 ```
 
-## Производительность
-- Поиск: O(log n)
-- Вставка: O(n)
-- Удаление: O(n)
+## Performance
+- Search: O(log n)
+- Insertion: O(n)
+- Deletion: O(n)

@@ -36,7 +36,7 @@ public:
     FlatMap& operator=(const FlatMap& other);
     FlatMap& operator=(FlatMap&& other) noexcept;
 
-    // Returns a value by key. An unsafe method
+    // Returns a value by key.
     // If the key is not present in the container, insert a default value into the container and return a reference to it:
     Value& operator[](const Key& key);
     
@@ -74,5 +74,6 @@ public:
     // Returns true if the container is empty, else returns false:
     bool Empty() const noexcept;
 };
+
 
 #include "flatmap.tpp"

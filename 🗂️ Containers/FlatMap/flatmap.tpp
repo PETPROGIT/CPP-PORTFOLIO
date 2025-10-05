@@ -39,7 +39,7 @@ FlatMap<Key, Value>& FlatMap<Key, Value>::operator=(FlatMap&& other) noexcept {
     return *this;
 }
 
-// Returns a value by key. An unsafe method
+// Returns a value by key.
 // If the key is not present in the container, insert a default value into the container and return a reference to it:
 template<typename Key, typename Value>
 Value& FlatMap<Key, Value>::operator[](const Key& key) {
@@ -180,4 +180,5 @@ auto FlatMap<Key, Value>::Find(const Key& key, bool& inFlatMap) {
 template<typename Key, typename Value>
 const auto FlatMap<Key, Value>::Find(const Key& key, bool& inFlatMap) const {
     return templateFind(Buffer.begin(), Buffer.end(), key, inFlatMap);
+
 }

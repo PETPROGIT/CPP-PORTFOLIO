@@ -20,3 +20,6 @@ A collection of algorithms, data structures, and projects implemented in C++.
 ## 🔗 Links
 - Leetcode: https://leetcode.com/u/MVA54/
 - Telegram: https://t.me/IWBADM/
+
+## 🎓 Education
+- 2nd year of undergraduate studies, Novosibirsk State Technical University, Faculty of Automation and Computer Engineering, Applied Informatics

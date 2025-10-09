@@ -22,4 +22,4 @@ A collection of algorithms, data structures, and projects implemented in C++.
 - Telegram: https://t.me/IWBADM/
 
 ## 🎓 Education
-- 2nd year of undergraduate studies, Novosibirsk State Technical University, Faculty of Automation and Computer Engineering, Applied Informatics
+- 2nd year undergraduate student at Novosibirsk State Technical University, Faculty of Automation and Computer Engineering, Applied Informatics.

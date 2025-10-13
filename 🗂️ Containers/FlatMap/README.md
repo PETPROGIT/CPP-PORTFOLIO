@@ -13,7 +13,7 @@ The `FlatMap<Key, Value>` template class is an associative container implemented
 ### Constructors:
 
 - `FlatMap()` - default constructor
-- `FlatMap(std::initializer_list<Pair>)` - initialization with list of pairs
+- `FlatMap(std::initializer_list<Pair<Key, Value>>)` - initialization with list of pairs
 - Copy and move constructors
 
 ### Access Operations:

@@ -5,7 +5,7 @@ A collection of algorithms, data structures, and projects implemented in C++.
 ## 📁 Repository Structure
 
 ### ⚡ Algorithms
-- **Mathematical Expression Calculator** - Shunting Yard algorithm implementation for evaluating arithmetic expressions
+- **Math Expression Calculator** - Shunting Yard algorithm implementation for evaluating arithmetic expressions
 
 ### 🗂️ Containers
 - **FlatMap** - Associative container based on a sorted vector

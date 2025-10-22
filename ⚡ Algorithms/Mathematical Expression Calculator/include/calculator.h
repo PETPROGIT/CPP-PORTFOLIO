@@ -9,8 +9,8 @@
 // Caused by incorrect syntax: mismatched parentheses, invalid characters, incorrectly formatted numbers, etc
 class SyntaxError : public std::runtime_error {
 public:
-    SyntaxError(const std::string& message = "Syntax error") noexcept :
-        std::runtime_error(message)
+    SyntaxError() noexcept :
+        std::runtime_error("Syntax error")
     {}
 };
 
@@ -28,4 +28,5 @@ public:
 // DOES NOT SUPPORT UNARY MINUS
 // Supports both space-separated and space-free strings
 // Throws: SyntaxError for invalid expressions, DivisionByZero for division by zero
+
 double Calculate(const std::string_view& expression);
